@@ -4,7 +4,6 @@ export const getData = async (req, res) => {
   try {
     const data = await Data.find();
     const results = data.map((doc) => doc.toObject());
-    console.log(JSON.stringify(results));
     res.status(200).json(results);
   } catch (err) {
     console.error(err);
@@ -17,7 +16,7 @@ export const getData = async (req, res) => {
 /* TODO: add the code to map the data to another file */
 export const saveData = async (req, res) => {
   try {
-    const excelData = req.body;
+    const excelData = Object.values(req.body);
     const mappedData = excelData.map((row) => {
       return {
         branch: row["Branch  F553007.MMCU"],
@@ -45,12 +44,24 @@ export const saveData = async (req, res) => {
       };
     });
     await Data.insertMany(mappedData);
-    console.log(mappedData);
+    console.log(excelData);
     res.json({ message: "data imported successfully" });
   } catch (err) {
     console.error(err);
     res
       .status(500)
       .json({ message: "Ha ocurrido un error al guardar los datos" });
+  }
+};
+
+export const deleteData = async (req, res) => {
+  try {
+    await Data.deleteMany({});
+    res.status(200).json({ message: "Data deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "Ha ocurrido un error al eliminar los datos" });
   }
 };

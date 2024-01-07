@@ -1,10 +1,14 @@
 import { Router } from "express";
-import { getData, saveData } from "../controllers/dataControllers.js";
+import {
+  getData,
+  saveData,
+  deleteData,
+} from "../controllers/dataControllers.js";
 
 const router = Router();
 
 router.get("/", getData);
 router.post("/", saveData);
-//router.delete("/", deleteData);
+router.delete("/", deleteData);
 
 export default router;
