@@ -1,7 +1,10 @@
 import { Router } from "express";
+import { getData, saveData } from "../controllers/dataControllers.js";
 
 const router = Router();
 
-router.get("/data", getData);
-router.post("/data", saveData);
-router.delete("/data", deleteData);
+router.get("/", getData);
+router.post("/", saveData);
+//router.delete("/", deleteData);
+
+export default router;

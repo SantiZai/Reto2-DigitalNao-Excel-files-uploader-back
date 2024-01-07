@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
+import dataRoutes from "./routes/dataRoutes.js";
 
 // create the express server
 const app = express();
@@ -12,4 +13,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
 
-export default app
+// routes
+app.use("/data", dataRoutes);
+
+export default app;
