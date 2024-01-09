@@ -1,10 +1,17 @@
 import { Data } from "../models.js";
 
+const getBatchedData = (data, page) => {
+  if (page === "1") return data.slice(0, 10);
+  else return data.slice(Number(page) * 10 - 10, Number(page) * 10);
+};
+
 export const getData = async (req, res) => {
+  const { page } = req.query;
   try {
     const data = await Data.find();
     const results = data.map((doc) => doc.toObject());
-    res.status(200).json(results);
+    const batch = getBatchedData(results, page);
+    res.status(200).json(batch);
   } catch (err) {
     console.error(err);
     res
