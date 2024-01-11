@@ -11,7 +11,7 @@ export const getData = async (req, res) => {
     const data = await Data.find();
     const results = data.map((doc) => doc.toObject());
     const batch = getBatchedData(results, page);
-    res.status(200).json(batch);
+    res.status(200).json({ batchedData: batch, dataLength: data.length });
   } catch (err) {
     console.error(err);
     res
