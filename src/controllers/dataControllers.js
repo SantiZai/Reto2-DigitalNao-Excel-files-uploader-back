@@ -51,7 +51,6 @@ export const saveData = async (req, res) => {
       };
     });
     await Data.insertMany(mappedData);
-    console.log(excelData);
     res.json({ message: "data imported successfully" });
   } catch (err) {
     console.error(err);

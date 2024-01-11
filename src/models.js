@@ -28,4 +28,13 @@ const dataSchema = new Schema(
   { strict: false }
 );
 
+const userSchemma = new Schema(
+  {
+    username: String,
+    password: String,
+  },
+  { strict: false }
+);
+
 export const Data = model("Data", dataSchema);
+export const User = model("User", userSchemma);
