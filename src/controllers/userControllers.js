@@ -1,3 +1,4 @@
+import { hash, compare } from "bcrypt";
 import { User } from "../models.js";
 
 export const getUsers = async (req, res) => {
@@ -14,7 +15,9 @@ export const getUsers = async (req, res) => {
 
 export const saveUser = async (req, res) => {
   try {
-    const newUser = req.body;
+    const { username, password } = req.body;
+    const hashedPasword = await hash(password, 10);
+    const newUser = { username, hashedPasword };
     await User.insertMany(newUser);
     res.json({ message: "User created successfully" });
   } catch (err) {
