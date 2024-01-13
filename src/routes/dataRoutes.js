@@ -4,11 +4,12 @@ import {
   saveData,
   deleteData,
 } from "../controllers/dataControllers.js";
+import { verifyToken } from "../utils/middlewares.js";
 
 const router = Router();
 
-router.get("/", getData);
-router.post("/", saveData);
-router.delete("/", deleteData);
+router.get("/", verifyToken, getData);
+router.post("/", verifyToken, saveData);
+router.delete("/", verifyToken, deleteData);
 
 export default router;
