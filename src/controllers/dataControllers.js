@@ -1,14 +1,5 @@
 import { Data } from "../models.js";
 
-const transformDate = (str) => {
-  let arr = str.split("-");
-  let year = `20${arr[2]}`;
-  arr = arr.slice(0, 2);
-  arr.splice(0, 0, year);
-  arr = arr.join("-");
-  return arr;
-};
-
 const getBatchedData = (data, page) => {
   if (page === "1") return data.slice(0, 10);
   else return data.slice(Number(page) * 10 - 10, Number(page) * 10);
@@ -72,14 +63,7 @@ export const saveData = async (req, res) => {
         workOrderQuantity: row["Work Order Quantity"],
       };
     });
-    const dateMapped = mappedData.map((row) => {
-      const rw = {
-        ...row,
-        wOStartDate: transformDate(row.wOStartDate),
-      };
-      return rw;
-    });
-    await Data.insertMany(dateMapped);
+    await Data.insertMany(mappedData);
     res.json({ message: "data imported successfully" });
   } catch (err) {
     console.error(err);
