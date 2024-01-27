@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "clean": "rimraf dist",
-    "build:js": "babel src --out-dir dist --extensions \".js,.mjs\"",
+    "build:js": "babel src --out-dir dist --extensions \".cjs,.mjs\"",
     "build": "npm run clean && npm run build:js",
     "start": "node dist/index.js"
   },
