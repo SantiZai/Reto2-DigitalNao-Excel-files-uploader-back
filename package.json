@@ -5,10 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ./src/index.js",
+    "dev": "nodemon src/index.js",
     "clean": "rimraf dist",
-    "build:js": "babel src --out-dir dist --extensions \".cjs,.mjs\"",
-    "build": "npm run clean && npm run build:js",
+    "build": "npm run clean && babel src --out-dir dist --extensions \".cjs\"",
     "start": "node dist/index.cjs"
   },
   "keywords": [],
