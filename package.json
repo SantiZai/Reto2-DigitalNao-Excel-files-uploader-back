@@ -7,8 +7,9 @@
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "clean": "rimraf dist",
-    "build:js": "babel src --out-dir dist",
-    "build": "npm run clean && npm run build:js"
+    "build:js": "babel src --out-dir dist --extensions \".js,.mjs\"",
+    "build": "npm run clean && npm run build:js",
+    "start": "node --no-babelrc dist/index.mjs"
   },
   "keywords": [],
   "author": "",
