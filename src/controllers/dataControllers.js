@@ -35,7 +35,6 @@ export const getById = async (req, res) => {
 
 export const saveData = async (req, res) => {
   try {
-    await Data.deleteMany({});
     const excelData = Object.values(req.body);
     const mappedData = excelData.map((row) => {
       return {
