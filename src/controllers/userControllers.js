@@ -33,14 +33,16 @@ export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
     const existingUser = await User.findOne({ username });
+    // verify if the user exists in the database
     !existingUser ?? res.status(404).json({ message: "User not found" });
+    // if the user exists, can compare the password in the request with the password of the user finded
     compare(password, existingUser.password)
       .then((isValidPassword) => {
+        // if the password is valid, generate a jwt for the client
         if (isValidPassword) {
           const token = jwt.sign({ id: existingUser._id }, "secretkey", {
             expiresIn: 86400,
           });
-          console.log(isValidPassword);
           res.status(200).json({ auth: true, token });
         } else res.status(404).json({ message: "The password are invalid" });
       })
